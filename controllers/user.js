@@ -29,7 +29,7 @@ exports.createAccount = (req, res) => {
 
 exports.selectAll = (req, res) => {
     User.findAll({
-        
+        attributes:["id", "fullname", "image", "email", "username", "password"]
     })
     .then(users => {
         res.send({
@@ -49,7 +49,7 @@ exports.selectAll = (req, res) => {
 
 exports.selectByID = (req, res) => {
     const parameter = req.params.id
-    User.findOne({
+    User.findAll({
         where: {id:parameter}, attributes:["id", "fullname", "image", "email", "username", "password"],
         include:
         [

@@ -55,7 +55,7 @@ exports.selectAll = (req, res) => {
 
 exports.selectByID = (req, res) => {
     const parameter = req.params.id
-    Genre.findOne({
+    Genre.findAll({
         where: {id:parameter}
     })
     .then(genre => {

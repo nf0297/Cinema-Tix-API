@@ -40,7 +40,7 @@ exports.selectAll = (req, res) => {
 
 exports.selectByID = (req, res) => {
     const parameter = req.params.id
-    Seat.findOne({
+    Seat.findAll({
         where: {id:parameter}
     })
     .then(seat => {

@@ -40,7 +40,7 @@ exports.selectAll = (req, res) => {
 
 exports.selectByID = (req, res) => {
     const parameter = req.params.id
-    Cinema.findOne({
+    Cinema.findAll({
         where: {id:parameter},
         include: 
         [

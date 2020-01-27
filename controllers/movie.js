@@ -1,5 +1,7 @@
 const models = require('../models')
 const Movie = models.movie
+const Genre = models.genre
+const Rating = models.rating
 
 exports.postMovie = (req, res) => {
     Movie.create(req.body)
@@ -20,7 +22,18 @@ exports.postMovie = (req, res) => {
 }
 
 exports.selectAll = (req, res) => {
-    Movie.findAll()
+    Movie.findAll({
+        attributes:['id', 'title', 'image', 'startdate', 'enddate'],
+        include: 
+        [
+            {
+                model: Genre, as: "Genre"
+            },
+            {
+                model: Rating, as: "AgeRating"
+            }
+        ]
+    })
     .then(movie => {
         res.send({
             message:"Select Data Movie Success!",
@@ -40,8 +53,18 @@ exports.selectAll = (req, res) => {
 
 exports.selectByID = (req, res) => {
     const parameter = req.params.id
-    Movie.findOne({
-        where: {id:parameter}
+    Movie.findAll({
+        where: {id:parameter},
+        attributes:['id', 'title', 'image', 'startdate', 'enddate'],
+        include: 
+        [
+            {
+                model: Genre, as: "Genre"
+            },
+            {
+                model: Rating, as: "AgeRating"
+            }
+        ]
     })
     .then(movie => {
         res.send({

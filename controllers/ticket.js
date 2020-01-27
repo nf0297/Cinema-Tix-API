@@ -39,7 +39,7 @@ exports.selectAll = (req, res) => {
 
 exports.selectByID = (req, res) => {
     const parameter = req.params.id
-    Ticket.findOne({
+    Ticket.findAll({
         where: {id:parameter}
     })
     .then(ticket => {

@@ -71,7 +71,7 @@ module.exports = {
       },
       {
         title: "Joker",
-        image: "https://images-na.ssl-images-amazon.com/images/I/91McXc5Cb4L._SY679_.jpg",
+        image: "https://images-na.ssl-images-amazon.com/images/I/71-6ttsgzVL._SL1500_.jpg",
         id_genre: 4,
         id_rating: 4,
         startdate: "2019-10-04",

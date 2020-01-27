@@ -40,7 +40,7 @@ exports.selectAll = (req, res) => {
 
 exports.selectByID = (req, res) => {
     const parameter = req.params.id
-    Rating.findOne({
+    Rating.findAll({
         where: {id:parameter}
     })
     .then(rating => {
