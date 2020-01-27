@@ -21,65 +21,28 @@ exports.postMovie = (req, res) => {
     })
 }
 
+
 exports.selectAll = (req, res) => {
     Movie.findAll({
-        attributes:['id', 'title', 'image', 'startdate', 'enddate'],
         include: 
         [
             {
-                model: Genre, as: "Genre"
-            },
-            {
-                model: Rating, as: "AgeRating"
+                model: Genre, as
             }
         ]
     })
-    .then(movie => {
-        res.send({
-            message:"Select Data Movie Success!",
-            movie,
-            error:false
-        })
-    })
-    .catch(err => {
-        res.send({
-            message:"Select Data Movie Failure!",
-            err,
-            error:true
-        })
-    })
+    .then(movie => res.send(movie))
+    .catch(err => res.send(err))
 }
 
 
 exports.selectByID = (req, res) => {
     const parameter = req.params.id
-    Movie.findAll({
-        where: {id:parameter},
-        attributes:['id', 'title', 'image', 'startdate', 'enddate'],
-        include: 
-        [
-            {
-                model: Genre, as: "Genre"
-            },
-            {
-                model: Rating, as: "AgeRating"
-            }
-        ]
+    Movie.findOne({
+        where: {id:parameter}
     })
-    .then(movie => {
-        res.send({
-            message:"Select Data Movie Success!",
-            movie,
-            error:false
-        })
-    })
-    .catch(err => {
-        res.send({
-            message:"Select Data Movie Failure!",
-            err,
-            error:true
-        })
-    })
+    .then(movie => res.send(movie))
+    .catch(err => res.send(err))
 }
 
 exports.deleteMovie = (req, res) => {
@@ -87,20 +50,8 @@ exports.deleteMovie = (req, res) => {
     Movie.destroy({
         where:{id:parameter}
     })
-    .then(movie => {
-        res.send({
-            message: "Movie Data Deleted!",
-            movie,
-            error:false
-        })
-    })
-    .catch(err => {
-        res.send({
-            message: "Delete Movie Data Failed!",
-            err,
-            error:true
-        })
-    })
+    .then(movie => res.send(movie))
+    .catch(err => res.send(err))
 }
 
 exports.updateByID = (req, res) => {
@@ -108,18 +59,6 @@ exports.updateByID = (req, res) => {
     Movie.update({
         where: {id:parameter}
     })
-    .then(movie => {
-        res.send({
-            message: "Update Movie Success!",
-            movie,
-            error:false
-        })
-    })
-    .catch(err => {
-        res.send({
-            message: "Update Movie Failed!",
-            err,
-            error:false
-        })
-    })
+    .then(movie => res.send(movie))
+    .catch(err => res.send(err))
 }
