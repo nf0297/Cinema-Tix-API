@@ -24,10 +24,12 @@ exports.postMovie = (req, res) => {
 
 exports.selectAll = (req, res) => {
     Movie.findAll({
-        include: 
-        [
+        include: [
             {
-                model: Genre, as
+                model: Genre, as: "Genre"
+            },
+            {
+                model: Rating, as: "AgeRating"
             }
         ]
     })
@@ -38,8 +40,16 @@ exports.selectAll = (req, res) => {
 
 exports.selectByID = (req, res) => {
     const parameter = req.params.id
-    Movie.findOne({
-        where: {id:parameter}
+    Movie.findAll({
+        where: {id:parameter},
+         include: [
+            {
+                model: Genre, as: "Genre"
+            },
+            {
+                model: Rating, as: "AgeRating"
+            }
+        ]
     })
     .then(movie => res.send(movie))
     .catch(err => res.send(err))
