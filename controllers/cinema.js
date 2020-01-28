@@ -36,20 +36,8 @@ exports.selectAll = (req, res) => {
             }
         ]
     })
-    .then(cinema => {
-        res.send({
-            message:"Select Data Cinema Success!",
-            cinema,
-            error:false
-        })
-    })
-    .catch(err => {
-        res.send({
-            message:"Select Data Cinema Failure!",
-            err,
-            error:true
-        })
-    })
+    .then(cinema => res.send(cinema))
+    .catch(err => res.send(err))
 }
 
 exports.selectByID = (req, res) => {
@@ -69,20 +57,8 @@ exports.selectByID = (req, res) => {
             }
         ]
     })
-    .then(cinema => {
-        res.send({
-            message:"Select Data Cinema Success!",
-            cinema,
-            error:false
-        })
-    })
-    .catch(err => {
-        res.send({
-            message:"Select Data Cinema Failure!",
-            err,
-            error:true
-        })
-    })
+   .then(cinema => res.send(cinema))
+    .catch(err => res.send(err))
 }
 
 exports.deleteCinema = (req, res) => {
