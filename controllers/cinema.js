@@ -1,6 +1,7 @@
 const models = require('../models')
 const Cinema = models.cinema
 const Hall = models.hall
+const Seat = models.seat
 
 exports.addCinema = (req, res) => {
     Cinema.create(req.body)
@@ -21,7 +22,20 @@ exports.addCinema = (req, res) => {
 }
 
 exports.selectAll = (req, res) => {
-    Cinema.findAll()
+    Cinema.findAll({
+        include: 
+        [
+            {
+                model:Hall, as:"Halls", attributes:["number","time"],
+                include: 
+                [
+                    {
+                        model:Seat, as:"Seat"
+                    }
+                ]
+            }
+        ]
+    })
     .then(cinema => {
         res.send({
             message:"Select Data Cinema Success!",
@@ -45,7 +59,13 @@ exports.selectByID = (req, res) => {
         include: 
         [
             {
-                model:Hall, as:"Halls", attributes:["number","time"]
+                model:Hall, as:"Halls", attributes:["number","time"],
+                include: 
+                [
+                    {
+                        model:Seat, as:"Seat"
+                    }
+                ]
             }
         ]
     })
